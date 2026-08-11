@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đề Cương Ôn Tập Học Kỳ I Tiếng Anh 7 - Ms Lê Hằng English</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================
+       1. GIAO DIỆN NỀN LOANG & HỌA TIẾT SVG GAMIFICATION
+       ========================================== */
+    :root {
+      --primary-purple: #8854C0;
+      --accent-yellow: #FDCB6E;
+      --accent-teal: #00C9A7;
+      --correct-green: #00D26A;
+      --wrong-red: #FF4757;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --text-dark: #2D3436;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Quicksand', 'Nunito', sans-serif;
+      min-height: 100vh;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 10px;
+      position: relative;
+      overflow-x: hidden;
+      background: linear-gradient(-45deg, #8854C0, #FDCB6E, #00C9A7, #FF7675, #6C5CE7);
+      background-size: 400% 400%;
+      animation: gradientSmooth 15s ease infinite;
+    }
+
+    @keyframes gradientSmooth {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.28;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 100 100"><path fill="%23FFF" d="M25,10 L29,20 L40,20 L31,27 L34,38 L25,31 L16,38 L19,27 L10,20 L21,20 Z"/><circle cx="75" cy="25" r="7" fill="%23FFF"/><path fill="%23FFF" d="M70,75 C70,70 80,70 80,75 C85,75 85,85 80,85 C80,90 70,90 70,85 C65,85 65,75 70,75 Z"/><path fill="%23FFF" d="M20,70 Q25,60 30,70 T40,70 T30,80 T20,70 Z"/><path fill="%23FFF" d="M80,15 C82,10 88,10 90,15 C95,17 95,23 90,25 C88,30 82,30 80,25 C75,23 75,17 80,15 Z"/></svg>');
+      background-size: 140px 140px;
+      animation: floatPattern 22s linear infinite;
+    }
+
+    @keyframes floatPattern {
+      from { background-position: 0 0; }
+      to { background-position: 500px 1000px; }
+    }
+
+    /* ==========================================
+       2. BỐ CỤC CHÍNH (CONTAINER)
+       ========================================== */
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 820px;
+      background: var(--card-bg);
+      border-radius: 28px;
+      padding: 25px 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.22), 0 0 0 8px rgba(255,255,255,0.45);
+      backdrop-filter: blur(12px);
+    }
+
+    .teacher-header {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .teacher-header h5 {
+      font-size: 0.95rem;
+      color: var(--primary-purple);
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      background: #E8D8F8;
+      display: inline-block;
+      padding: 5px 18px;
+      border-radius: 20px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.06);
+    }
+
+    .alert-banner {
+      background: #FFF9DB;
+      border: 3px dashed #FCC419;
+      border-radius: 18px;
+      padding: 14px 20px;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #D9480F;
+      font-weight: 700;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .alert-banner .title {
+      font-size: 1.05rem;
+      font-weight: 900;
+      display: block;
+      margin-bottom: 4px;
+      color: #E65100;
+    }
+
+    .alert-banner .highlight {
+      color: #D32F2F;
+      text-decoration: underline;
+      font-style: italic;
+    }
+
+    .progress-box {
+      margin-bottom: 25px;
+      background: #E9ECEF;
+      border-radius: 14px;
+      height: 20px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid #CED4DA;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00C9A7, #00D26A);
+      transition: width 0.4s ease;
+    }
+
+    /* ==========================================
+       3. THẺ CÂU HỎI & NÚT LỰA CHỌN 3D
+       ========================================== */
+    .section-heading {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--primary-purple);
+      margin: 25px 0 15px 0;
+      padding: 12px 18px;
+      background: #F1F3F5;
+      border-radius: 16px;
+      border-left: 6px solid var(--primary-purple);
+      line-height: 1.5;
+    }
+
+    .question-card {
+      background: #FFFFFF;
+      border-radius: 22px;
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+      border: 2px solid #E9ECEF;
+      transition: transform 0.2s ease;
+    }
+
+    .question-title {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: #2D3436;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      background: #F8F9FA;
+      border: 2px solid #E9ECEF;
+      border-bottom: 5px solid #CED4DA;
+      border-radius: 18px;
+      padding: 14px 20px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #495057;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: inherit;
+    }
+
+    .option-btn:hover:not(.disabled) {
+      transform: scale(1.01) translateY(-2px);
+      border-color: #B2BEC3;
+      background: #FFFFFF;
+    }
+
+    .option-btn:active:not(.disabled) {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+    }
+
+    .option-btn.correct {
+      background-color: #D4EDDA !important;
+      border-color: var(--correct-green) !important;
+      border-bottom-color: #27AE60 !important;
+      color: #155724 !important;
+    }
+
+    .option-btn.wrong {
+      background-color: #F8D7DA !important;
+      border-color: var(--wrong-red) !important;
+      border-bottom-color: #C0392B !important;
+      color: #721C24 !important;
+      animation: shake 0.4s ease;
+    }
+
+    .option-btn.disabled {
+      cursor: default;
+      opacity: 0.9;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    /* ==========================================
+       4. KHUNG GIẢI THÍCH CHI TIẾT 4 BƯỚC
+       ========================================== */
+    .explanation-box {
+      display: none;
+      margin-top: 18px;
+      background: #F8F9FA;
+      border: 2px dashed var(--primary-purple);
+      border-left: 6px solid var(--primary-purple);
+      border-radius: 14px;
+      padding: 16px 20px;
+      font-size: 0.93rem;
+      line-height: 1.65;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .explanation-box .exp-title {
+      font-weight: 800;
+      color: var(--primary-purple);
+      font-size: 1rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .explanation-box .step {
+      margin-bottom: 8px;
+    }
+
+    .explanation-box ul {
+      margin-left: 22px;
+      margin-bottom: 8px;
+    }
+
+    .explanation-box ul li {
+      margin-bottom: 3px;
+    }
+
+    .explanation-box .highlight-green {
+      color: #27AE60;
+      font-weight: 700;
+    }
+
+    /* ==========================================
+       5. NÚT NỘP BÀI VÀ POPUP KẾT QUẢ
+       ========================================== */
+    .submit-container {
+      text-align: center;
+      margin-top: 35px;
+      margin-bottom: 15px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(180deg, #00C9A7 0%, #00B894 100%);
+      color: white;
+      border: none;
+      border-bottom: 6px solid #008F68;
+      border-radius: 22px;
+      padding: 16px 50px;
+      font-size: 1.25rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(0,201,167,0.35);
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(0,201,167,0.45);
+    }
+
+    .submit-btn:active {
+      transform: translateY(3px);
+      border-bottom-width: 2px;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 26px;
+      padding: 32px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-score {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: var(--primary-purple);
+      margin: 15px 0;
+    }
+
+    .modal-feedback {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #2D3436;
+      margin-bottom: 25px;
+      background: #F8F9FA;
+      padding: 16px;
+      border-radius: 18px;
+      border: 2px dashed #B2BEC3;
+      font-weight: 700;
+    }
+
+    .close-btn {
+      background: var(--primary-purple);
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="container">
+    <div class="teacher-header">
+      <h5>Giáo viên tạo: Ms Lê Hằng English</h5>
+    </div>
+
+    <div class="alert-banner">
+      <span class="title">⚠️ LỜI NHẮC CỰC KỲ QUAN TRỌNG ⚠️</span>
+      Chỉ có đọc kỹ giải thích ngay sau mỗi câu, sau đó ghi lại từ vựng/cấu trúc mới vào vở để học thì mới thực sự giỏi lên.<br>
+      Làm cho xong mà không đọc giải thích hay đọc qua loa không ghi chép thì chỉ tốn thời gian vô ích!<br>
+      <span class="highlight">* Kéo tới đâu, làm tới đó! *</span>
+    </div>
+
+    <div class="progress-box">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <div id="quiz-container"></div>
+
+    <div class="submit-container">
+      <button class="submit-btn" onclick="submitQuiz()">NỘP BÀI KIỂM TRA 🚀</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="result-modal">
+    <div class="modal-content">
+      <h2 style="color: var(--primary-purple);">🎉 KẾT QUẢ BÀI THI 🎉</h2>
+      <div class="modal-score" id="modal-score-text">0 / 0</div>
+      <div class="modal-feedback" id="modal-feedback-text"></div>
+      <button class="close-btn" onclick="closeModal()">Xem lại đáp án chi tiết</button>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================
+       1. CƠ SỞ DỮ LIỆU ĐỀ BÀI (SECTION I & II)
+       ========================================== */
+    const quizData = [
+      // ----- SECTION I: SENTENCE BUILDING (1-10) -----
+      {
+        id: "s1_1",
+        section: "I. Choose the correct sentence built from the given words.",
+        question: "1. I/ interested/ foreign/ languages/ ./",
+        options: [
+          { letter: "A", text: "I'm interested in learning foreign languages." },
+          { letter: "B", text: "I'm interested at learning foreigner languages." },
+          { letter: "C", text: "I'm interested on learning foreign languages." },
+          { letter: "D", text: "I'm interested in learn foreigner languages." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch nghĩa: 'Tôi hứng thú với việc học các ngôn ngữ nước ngoài.'",
+          step2: [
+            "A. I'm interested in learning foreign languages. (Cụm be interested in + V-ing + foreign languages chuẩn 100%).",
+            "B. ...interested at... foreigner... (Sai giới từ 'at' và sai danh từ 'foreigner' thay vì tính từ 'foreign').",
+            "C. ...interested on... (Sai giới từ 'on').",
+            "D. ...learn foreigner... (Sai V-bare sau giới từ và sai tính từ 'foreign')."
+          ],
+          step3: "Tại sao chọn A? Cấu trúc cố định: be interested in + V-ing (thích/hứng thú làm gì). Cụm tính từ + danh từ: 'foreign languages' (ngoại ngữ).",
+          step4: "Loại B, C sai giới từ; loại D dùng sai dạng động từ nguyên thể và danh từ."
+        }
+      },
+      {
+        id: "s1_2",
+        section: "I. Choose the correct sentence built from the given words.",
+        question: "2. What time/ David/ get up/ this morning/ ?/",
+        options: [
+          { letter: "A", text: "What time was David getting up in this morning?" },
+          { letter: "B", text: "What time does David get up this morning?" },
+          { letter: "C", text: "What time did David get up this morning?" },
+          { letter: "D", text: "What time David got up this morning?" }
+        ],
+        correct: "C",
+        explanation: {
+          step1: "Dịch nghĩa: 'Sáng nay David dậy lúc mấy giờ?'",
+          step2: [
+            "A. ...was David getting up... (Sai thì tiếp diễn và thừa giới từ 'in').",
+            "B. ...does David... (Sáng nay đã xảy ra rồi nên dùng Hiện tại đơn 'does' là sai).",
+            "C. What time did David get up this morning? (Đúng thì Quá khứ đơn hỏi về hành động đã xảy ra sáng nay).",
+            "D. ...David got up... (Thiếu trợ động từ 'did' trong câu hỏi nghi vấn)."
+          ],
+          step3: "Tại sao chọn C? 'This morning' hỏi về sự việc đã hoàn thành trong quá khứ ➔ Dùng thì Quá khứ đơn. Cấu trúc câu hỏi: Wh-word + did + S + V-bare?",
+          step4: "Loại A sai thì tiếp diễn; loại B sai thì hiện tại; loại D thiếu trợ động từ."
+        }
+      },
+      {
+        id: "s1_3",
+        section: "I. Choose the correct sentence built from the given words.",
+        question: "3. I/ used/ travel/ 20 kilometers/ school/ 3 years ago/ ./",
+        options: [
+          { letter: "A", text: "I used to travelling 20 kilometers to school 3 years ago." },
+          { letter: "B", text: "I used to travel 20 kilometers to school 3 years ago." },
+          { letter: "C", text: "I used to travelled 20 kilometers to school 3 years ago." },
+          { letter: "D", text: "I used travel 20 kilometers to school 3 years ago." }
+        ],
+        correct: "B",
+        explanation: {
+          step1: "Dịch nghĩa: 'Tôi từng đi quãng đường 20 km đến trường cách đây 3 năm.'",
+          step2: [
+            "A. ...used to travelling... (Sai V-ing sau used to chỉ thói quen quá khứ).",
+            "B. I used to travel 20 kilometers to school 3 years ago. (Đúng cấu trúc used to + V-bare).",
+            "C. ...used to travelled... (Sai V-ed sau to).",
+            "D. ...used travel... (Thiếu 'to' sau used)."
+          ],
+          step3: "Tại sao chọn B? Cấu trúc chỉ thói quen/hành động đã từng làm trong quá khứ và nay không còn nữa: S + used to + V-bare.",
+          step4: "Loại A sai V-ing; loại C sai V-ed; loại D thiếu 'to'."
+        }
+      },
+      {
+        id: "s1_4",
+        section: "I. Choose the correct sentence built from the given words.",
+        question: "4. It/ annoy/ my cousin/ always/ make noise/ ./",
+        options: [
+          { letter: "A", text: "It's annoying that my cousin is always making noise." },
+          { letter: "B", text: "It's annoying that my cousin always making noise." },
+          { letter: "C", text: "It's annoyed that my cousin always makes noise." },
+          { letter: "D", text: "It's annoyed that my cousin is always making noise." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch nghĩa: 'Thật phiền phức khi em họ tôi lúc nào cũng làm ồn.'",
+          step2: [
+            "A. It's annoying that my cousin is always making noise. (Đúng tính từ chỉ bản chất sự việc 'annoying' và thì tiếp diễn với 'always' phàn nàn).",
+            "B. ...cousin always making... (Thiếu to-be 'is').",
+            "C, D. ...It's annoyed... (Sai tính từ đuôi -ed chỉ cảm xúc con người, không dùng cho 'It's')."
+          ],
+          step3: "Tại sao chọn A? Cấu trúc chủ ngữ giả chỉ bản chất sự việc: It's + Adj-ing (annoying) + that + clause. Diễn tả sự phàn nàn dùng: S + is/are + always + V-ing.",
+          step4: "Loại B thiếu to-be; loại C, D dùng sai tính từ 'annoyed'."
+        }
+      },
+      {
+        id: "s1_5",
+        section: "I. Choose the correct sentence built from the given words.",
+        question: "5. It/ snow/ when/ they/ arrive/ Paris/ ./",
+        options: [
+          { letter: "A", text: "It was snowing when they arrived Parris." },
+          { letter: "B", text: "It was snowing when they arrived in Paris." },
+          { letter: "C", text: "It snowed when they were arriving Parris." },
+          { letter: "D", text: "It is snowing when they arrived in Parris." }
+        ],
+        correct: "B",
+        explanation: {
+          step1: "Dịch nghĩa: 'Trời đang rơi tuyết khi họ đến Paris.'",
+          step2: [
+            "A, C, D. Sai chính tả/thiếu giới từ 'arrived in Paris' (thành phố lớn phải dùng arrive in).",
+            "B. It was snowing when they arrived in Paris. (Đúng phối hợp thì Quá khứ tiếp diễn + Quá khứ đơn và giới từ arrived in)."
+          ],
+          step3: "Tại sao chọn B? Sự việc đang diễn ra (was snowing) thì sự việc khác chen ngang (arrived). Động từ 'arrive in + thành phố/quốc gia' (arrived in Paris).",
+          step4: "Loại A, C thiếu giới từ 'in'; loại D sai lệch thì hiện tại tiếp diễn."
+        }
+      },
+      {
+        id: "s1_6",
+        section: "I. Choose the correct sentence built from the given words.",
+        question: "6. I/ want/ buy/ something/ daughter/ present/ ./",
+        options: [
+          { letter: "A", text: "I want buying something for my daughter as a present." },
+          { letter: "B", text: "I want to buy something to my daughter as a present." },
+          { letter: "C", text: "I want buy something for my daughter as a present." },
+          { letter: "D", text: "I want to buy something for my daughter as a present." }
+        ],
+        correct: "D",
+        explanation: {
+          step1: "Dịch nghĩa: 'Tôi muốn mua một thứ gì đó cho con gái tôi làm quà tặng.'",
+          step2: [
+            "A. ...want buying... (Sai V-ing sau want).",
+            "B. ...buy something to my daughter... (Sai giới từ 'to', đúng phải là 'for my daughter').",
+            "C. ...want buy... (Thiếu 'to' sau want).",
+            "D. I want to buy something for my daughter as a present. (Đúng ngữ pháp 100%)."
+          ],
+          step3: "Tại sao chọn D? Cấu trúc: want + to-V-bare. Mua cái gì cho ai: buy something FOR someone as a present.",
+          step4: "Loại A, B, C sai cấu trúc động từ 'want' và giới từ 'for'."
+        }
+      },
+      {
+        id: "s1_7",
+        section: "I. Choose the correct sentence built from the given words.",
+        question: "7. We/ play football/ 9:30/ yesterday/ ./",
+        options: [
+          { letter: "A", text: "We were playing football in 9:30 yesterday." },
+          { letter: "B", text: "We played football at 9:30 yesterday." },
+          { letter: "C", text: "We are playing football at 9:30 yesterday." },
+          { letter: "D", text: "We were playing football at 9:30 yesterday." }
+        ],
+        correct: "D",
+        explanation: {
+          step1: "Dịch nghĩa: 'Chúng tôi đang chơi đá bóng vào lúc 9:30 ngày hôm qua.'",
+          step2: [
+            "A. ...in 9:30... (Sai giới từ chỉ giờ, phải dùng 'at').",
+            "B. ...played... (Hiện tại thời điểm xác định trong quá khứ ưu tiên thì Quá khứ tiếp diễn).",
+            "C. ...are playing... (Sai thì hiện tại).",
+            "D. We were playing football at 9:30 yesterday. (Đúng ngữ pháp thì Quá khứ tiếp diễn tại thời điểm cụ thể)."
+          ],
+          step3: "Tại sao chọn D? Có mốc thời gian xác định trong quá khứ ('at 9:30 yesterday') ➔ Chia thì Quá khứ tiếp diễn: S + was/were + V-ing.",
+          step4: "Loại A sai giới từ; loại B, C sai thì."
+        }
+      },
+      {
+        id: "s1_8",
+        section: "I. Choose the correct sentence built from the given words.",
+        question: "8. Your dad/ smile/ holiday photo/ ./",
+        options: [
+          { letter: "A", text: "Your dad was smiling in holiday photo." },
+          { letter: "B", text: "Your dad was smiling on the holiday photo." },
+          { letter: "C", text: "Your dad was smiling in the holiday photo." },
+          { letter: "D", text: "Your dad smiled in holiday photo." }
+        ],
+        correct: "C",
+        explanation: {
+          step1: "Dịch nghĩa: 'Bố của bạn đang mỉm cười trong bức ảnh kỳ nghỉ.'",
+          step2: [
+            "A. ...in holiday photo (Thiếu mạo từ 'the').",
+            "B. ...on the holiday photo (Giới từ trong ảnh dùng 'in the photo', không dùng 'on').",
+            "C. Your dad was smiling in the holiday photo. (Chuẩn xác giới từ và mạo từ).",
+            "D. ...in holiday photo (Thiếu mạo từ 'the')."
+          ],
+          step3: "Tại sao chọn C? Giới từ đi với bức ảnh: 'in the photo' / 'in the holiday photo'. Mối quan hệ miêu tả hình ảnh thường dùng tiếp diễn 'was smiling'.",
+          step4: "Loại A, D thiếu mạo từ 'the'; loại B sai giới từ 'on'."
+        }
+      },
+      {
+        id: "s1_9",
+        section: "I. Choose the correct sentence built from the given words.",
+        question: "9. I/ bothered/ Internet/ because/ I/ love/ outside/ ./",
+        options: [
+          { letter: "A", text: "I am not bothered of the Internet because I love being outside." },
+          { letter: "B", text: "I am not bothered about Internet because I love being outside." },
+          { letter: "C", text: "I am not bothered about the Internet because I love being outside." },
+          { letter: "D", text: "I am not bothered into the Internet because I love being outside." }
+        ],
+        correct: "C",
+        explanation: {
+          step1: "Dịch nghĩa: 'Tôi không bận tâm/phiền lòng về Mạng Internet vì tôi thích ở ngoài trời.'",
+          step2: [
+            "A, D. Sai giới từ 'of/into' (bothered đi với 'about').",
+            "B. ...about Internet (Thiếu mạo từ 'the' trước 'Internet').",
+            "C. I am not bothered about the Internet because I love being outside. (Đúng ngữ pháp 100%)."
+          ],
+          step3: "Tại sao chọn C? Cụm từ: 'be bothered about something' (bận tâm về cái gì). 'Internet' luôn đi với mạo từ 'the Internet'.",
+          step4: "Loại A, D sai giới từ; loại B thiếu mạo từ 'the'."
+        }
+      },
+      {
+        id: "s1_10",
+        section: "I. Choose the correct sentence built from the given words.",
+        question: "10. I/ sorry/ get angry/ you/ yesterday/ ./",
+        options: [
+          { letter: "A", text: "I'm sorry for I get angry with you yesterday." },
+          { letter: "B", text: "I'm sorry I get angry with you yesterday." },
+          { letter: "C", text: "I'm sorry I got angry with you yesterday." },
+          { letter: "D", text: "I'm sorry I had got angry with you yesterday." }
+        ],
+        correct: "C",
+        explanation: {
+          step1: "Dịch nghĩa: 'Tôi xin lỗi vì hôm qua tôi đã nổi giận với bạn.'",
+          step2: [
+            "A. ...for I get... (Dùng 'for' sai cấu trúc mệnh đề và sai thì 'get').",
+            "B. ...get angry... (Sai thì hiện tại khi có 'yesterday').",
+            "C. I'm sorry I got angry with you yesterday. (Đúng quá khứ đơn 'got angry with someone').",
+            "D. ...had got angry... (Thừa thì quá khứ hoàn thành không cần thiết)."
+          ],
+          step3: "Tại sao chọn C? Mốc thời gian 'yesterday' buộc động từ chia Quá khứ đơn 'got angry'. Cấu trúc: 'be sorry (that) + clause' hoặc 'get angry with someone'.",
+          step4: "Loại A, B sai thì hiện tại; loại D thừa thì quá khứ hoàn thành."
+        }
+      },
+
+      // ----- SECTION II: SENTENCE TRANSFORMATION (1-10) -----
+      {
+        id: "s2_1",
+        section: "II. Rewrite the sentences so that their meaning stays the same, using the words given.",
+        question: "1. I don't mind what we eat. (BOTHERED)<br>➔ I'm _______.",
+        options: [
+          { letter: "A", text: "I'm not bothered about what we eat." },
+          { letter: "B", text: "I'm not bothered of what we eat." },
+          { letter: "C", text: "I'm bothered about what we eat." },
+          { letter: "D", text: "I'm not bothered with what we eat." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch câu gốc: 'Tôi không bận tâm/sao cũng được về việc chúng ta ăn gì.'",
+          step2: [
+            "A. I'm not bothered about what we eat. (Đúng nghĩa không bận tâm và đúng giới từ 'about').",
+            "B, D. Sai giới từ 'of/with'.",
+            "C. Mất phủ định 'not' làm ngược nghĩa."
+          ],
+          step3: "Tại sao chọn A? Cấu trúc đồng nghĩa: 'don't mind' = 'be not bothered about something' (không bận tâm/không ngại việc gì).",
+          step4: "Loại B, D sai giới từ; loại C sai ý nghĩa phủ định."
+        }
+      },
+      {
+        id: "s2_2",
+        section: "II. Rewrite the sentences so that their meaning stays the same, using the words given.",
+        question: "2. Nick's father is a more careful driver than him. (DRIVES)<br>➔ Nick's father _______.",
+        options: [
+          { letter: "A", text: "Nick's father drives more carefully than him." },
+          { letter: "B", text: "Nick's father drives more careful than him." },
+          { letter: "C", text: "Nick's father drives carefully than him." },
+          { letter: "D", text: "Nick's father drives most carefully than him." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch câu gốc: 'Bố của Nick là một tài xế cẩn thận hơn anh ấy.' ➔ 'Bố của Nick lái xe cẩn thận hơn anh ấy.'",
+          step2: [
+            "A. Nick's father drives more carefully than him. (Đúng trạng từ 'carefully' bổ nghĩa cho động từ 'drives').",
+            "B. ...drives more careful... (Sai tính từ 'careful' đứng sau động từ thường).",
+            "C. ...drives carefully... (Thiếu 'more' trong so sánh hơn).",
+            "D. ...most carefully... (Sai dùng so sánh nhất)."
+          ],
+          step3: "Tại sao chọn A? Chuyển đổi từ 'be a + Adj + N' sang 'V + Adv': 'careful driver' ➔ 'drives carefully'. So sánh hơn của trạng từ dài: 'more carefully than'.",
+          step4: "Loại B dùng tính từ; loại C thiếu 'more'; loại D sai dạng so sánh."
+        }
+      },
+      {
+        id: "s2_3",
+        section: "II. Rewrite the sentences so that their meaning stays the same, using the words given.",
+        question: "3. She likes going shopping better than watching TV. (TO)<br>➔ She prefers _______.",
+        options: [
+          { letter: "A", text: "She prefers going shopping to watching TV." },
+          { letter: "B", text: "She prefers going shopping than watching TV." },
+          { letter: "C", text: "She prefers to go shopping than watch TV." },
+          { letter: "D", text: "She prefers go shopping to watch TV." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch câu gốc: 'Cô ấy thích đi mua sắm hơn xem TV.'",
+          step2: [
+            "A. She prefers going shopping to watching TV. (Đúng cấu trúc prefer V-ing to V-ing).",
+            "B. ...prefers... than... (Sai dùng 'than' với 'prefer').",
+            "C. ...prefers to go... than... (Dùng 'prefer to-V' phải đi với 'rather than', không đi với 'than' đơn lẻ).",
+            "D. ...prefers go... (Sai V-bare)."
+          ],
+          step3: "Tại sao chọn A? Cấu trúc thích cái gì hơn cái gì: 'like V-ing 1 better than V-ing 2' = 'prefer V-ing 1 TO V-ing 2'.",
+          step4: "Loại B, C, D sai giới từ 'to' hoặc sai dạng động từ."
+        }
+      },
+      {
+        id: "s2_4",
+        section: "II. Rewrite the sentences so that their meaning stays the same, using the words given.",
+        question: "4. Because Jack drove carelessly, he had an accident. (CARELESS)<br>➔ Because of _______.",
+        options: [
+          { letter: "A", text: "Because of Jack's careless driving, he had an accident." },
+          { letter: "B", text: "Because of Jack drove carelessly, he had an accident." },
+          { letter: "C", text: "Because of Jack's careless driver, he had an accident." },
+          { letter: "D", text: "Because of careless driving Jack, he had an accident." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch câu gốc: 'Bởi vì Jack lái xe ẩu, cậu ấy đã gặp tai nạn.' ➔ 'Bởi vì việc lái xe ẩu của Jack, cậu ấy đã gặp tai nạn.'",
+          step2: [
+            "A. Because of Jack's careless driving, he had an accident. (Đúng cụm danh từ/danh động từ sau Because of).",
+            "B. ...Because of Jack drove... (Sau 'Because of' không đi với mệnh đề S + V).",
+            "C. ...careless driver... (Người tài xế ẩu ➔ Sai nghĩa vụ việc).",
+            "D. ...careless driving Jack... (Sai trật tự sở hữu cách)."
+          ],
+          step3: "Tại sao chọn A? Quy đổi từ 'Because + S + V + Adv' sang 'Because of + N/Gerund phrase': 'Because of + Jack's + Adj (careless) + N/V-ing (driving)'.",
+          step4: "Loại B dùng mệnh đề; loại C sai từ chỉ người 'driver'; loại D sai trật tự từ."
+        }
+      },
+      {
+        id: "s2_5",
+        section: "II. Rewrite the sentences so that their meaning stays the same, using the words given.",
+        question: "5. When I was a child, I would go to the local park every morning. (USED)<br>➔ I _______.",
+        options: [
+          { letter: "A", text: "I used to go to the local park every morning when I was a child." },
+          { letter: "B", text: "I used to going to the local park every morning when I was a child." },
+          { letter: "C", text: "I used go to the local park every morning when I was a child." },
+          { letter: "D", text: "I used to went to the local park every morning when I was a child." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch câu gốc: 'Khi tôi còn nhỏ, tôi thường đi đến công viên địa phương mỗi buổi sáng.'",
+          step2: [
+            "A. I used to go to the local park every morning when I was a child. (Đúng used to + V-bare).",
+            "B. ...used to going... (Sai V-ing).",
+            "C. ...used go... (Thiếu 'to').",
+            "D. ...used to went... (Sai quá khứ 'went')."
+          ],
+          step3: "Tại sao chọn A? 'Would + V-bare' chỉ thói quen quá khứ đồng nghĩa với 'used to + V-bare'.",
+          step4: "Loại B, C, D sai dạng cấu trúc 'used to'."
+        }
+      },
+      {
+        id: "s2_6",
+        section: "II. Rewrite the sentences so that their meaning stays the same, using the words given.",
+        question: "6. How about organizing a garage sale to raise money for charity? (ORGANIZE)<br>➔ Why don't _______.",
+        options: [
+          { letter: "A", text: "Why don't we organize a garage sale to raise money for charity?" },
+          { letter: "B", text: "Why don't we organizing a garage sale to raise money for charity?" },
+          { letter: "C", text: "Why don't organize a garage sale to raise money for charity?" },
+          { letter: "D", text: "Why don't we to organize a garage sale to raise money for charity?" }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch câu gốc: 'Thế còn việc tổ chức một buổi bán đồ cũ để gây quỹ từ thiện thì sao?' ➔ 'Tại sao chúng ta không tổ chức một buổi bán đồ cũ...?'",
+          step2: [
+            "A. Why don't we organize a garage sale to raise money for charity? (Đúng cấu trúc đề nghị).",
+            "B. ...organizing... (Sai V-ing sau 'Why don't we').",
+            "C. ...Why don't organize... (Thiếu chủ ngữ 'we').",
+            "D. ...to organize... (Sai 'to-V' sau 'Why don't we')."
+          ],
+          step3: "Tại sao chọn A? Cấu trúc đề nghị/gợi ý tương đương: 'How about + V-ing...?' = 'Why don't we + V-bare...?'.",
+          step4: "Loại B, C, D do sai dạng động từ hoặc thiếu chủ ngữ 'we'."
+        }
+      },
+      {
+        id: "s2_7",
+        section: "II. Rewrite the sentences so that their meaning stays the same, using the words given.",
+        question: "7. The children couldn't go swimming because the weather was so cold. (ENOUGH)<br>➔ The weather was not _______.",
+        options: [
+          { letter: "A", text: "The weather was not warm enough for the children to go swimming." },
+          { letter: "B", text: "The weather was not cold enough for the children to go swimming." },
+          { letter: "C", text: "The weather was not enough warm for the children to go swimming." },
+          { letter: "D", text: "The weather was not warm enough to the children go swimming." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch câu gốc: 'Bọn trẻ không thể đi bơi vì thời tiết quá lạnh.' ➔ 'Thời tiết không đủ ấm cho bọn trẻ đi bơi.'",
+          step2: [
+            "A. The weather was not warm enough for the children to go swimming. (Đúng nghĩa và vị trí 'warm enough').",
+            "B. ...not cold enough... (Không đủ lạnh ➔ Sai nghĩa).",
+            "C. ...enough warm... (Sai vị trí tính từ, tính từ phải đứng trước 'enough').",
+            "D. ...enough to the children go... (Sai cấu trúc 'for someone to-V')."
+          ],
+          step3: "Tại sao chọn A? Chuyển đổi 'too/so + Adj' sang 'not + Adj (trái nghĩa) + enough': 'so cold' ➔ 'not warm enough for someone to V'.",
+          step4: "Loại B sai nghĩa; loại C sai vị trí 'enough'; loại D sai cấu trúc 'for O to V'."
+        }
+      },
+      {
+        id: "s2_8",
+        section: "II. Rewrite the sentences so that their meaning stays the same, using the words given.",
+        question: "8. My son enjoys playing computer games. (CRAZY)<br>➔ My son is _______.",
+        options: [
+          { letter: "A", text: "My son is crazy about playing computer games." },
+          { letter: "B", text: "My son is crazy with playing computer games." },
+          { letter: "C", text: "My son is crazy for playing computer games." },
+          { letter: "D", text: "My son is crazy about play computer games." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch câu gốc: 'Con trai tôi thích chơi trò chơi điện tử.' ➔ 'Con trai tôi cuồng/rất thích chơi trò chơi điện tử.'",
+          step2: [
+            "A. My son is crazy about playing computer games. (Đúng cụm be crazy about + V-ing).",
+            "B, C. ...crazy with / for... (Sai giới từ đi với 'crazy').",
+            "D. ...about play... (Sai V-bare sau giới từ 'about')."
+          ],
+          step3: "Tại sao chọn A? Cụm tính từ cố định chỉ sự đam mê/cuồng nhiệt: 'be crazy about + V-ing/N' (rất thích/cuồng cái gì).",
+          step4: "Loại B, C sai giới từ; loại D dùng sai V-bare."
+        }
+      },
+      {
+        id: "s2_9",
+        section: "II. Rewrite the sentences so that their meaning stays the same, using the words given.",
+        question: "9. Nick's mother allowed him to use his phone while studying yesterday. (LET)<br>➔ Nick's mother _______.",
+        options: [
+          { letter: "A", text: "Nick's mother let him use his phone while studying yesterday." },
+          { letter: "B", text: "Nick's mother let him to use his phone while studying yesterday." },
+          { letter: "C", text: "Nick's mother lets him use his phone while studying yesterday." },
+          { letter: "D", text: "Nick's mother let him using his phone while studying yesterday." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch câu gốc: 'Mẹ của Nick đã cho phép cậu ấy dùng điện thoại khi đang học vào ngày hôm qua.'",
+          step2: [
+            "A. Nick's mother let him use his phone while studying yesterday. (Đúng quá khứ 'let' + O + V-bare).",
+            "B. ...let him to use... (Sai 'to-V' sau 'let').",
+            "C. ...lets him... (Sai thì hiện tại 'lets' khi câu có mốc quá khứ 'yesterday').",
+            "D. ...let him using... (Sai V-ing)."
+          ],
+          step3: "Tại sao chọn A? Cấu trúc cho phép ai làm gì: 'allow someone to V' = 'LET someone + V-bare'. Quá khứ của động từ 'let' vẫn giữ nguyên hình thức là 'let'.",
+          step4: "Loại B, D sai dạng động từ sau 'let'; loại C sai chia thì."
+        }
+      },
+      {
+        id: "s2_10",
+        section: "II. Rewrite the sentences so that their meaning stays the same, using the words given.",
+        question: "10. Richard no longer lives in York. (USED)<br>➔ Richard _______.",
+        options: [
+          { letter: "A", text: "Richard used to live in York." },
+          { letter: "B", text: "Richard used to living in York." },
+          { letter: "C", text: "Richard used live in York." },
+          { letter: "D", text: "Richard didn't use to live in York." }
+        ],
+        correct: "A",
+        explanation: {
+          step1: "Dịch câu gốc: 'Richard không còn sống ở York nữa.' ➔ 'Richard đã từng sống ở York.'",
+          step2: [
+            "A. Richard used to live in York. (Đúng cấu trúc đã từng làm gì trong quá khứ).",
+            "B. ...used to living... (Sai V-ing).",
+            "C. ...used live... (Thiếu 'to').",
+            "D. ...didn't use to live... (Richard đã không từng sống ở York ➔ Trái ngược nghĩa gốc)."
+          ],
+          step3: "Tại sao chọn A? Cấu trúc quy đổi thói quen/trạng thái trong quá khứ nay không còn nữa: 'no longer + V (present)' = 'USED TO + V-bare'.",
+          step4: "Loại B, C sai cấu trúc 'used to'; loại D sai ý nghĩa phủ định."
+        }
+      }
+    ];
+
+    /* ==========================================
+       2. TẠO ÂM THANH BẰNG WEB AUDIO API
+       ========================================== */
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'correct') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(110, audioCtx.currentTime + 0.25);
+        gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    /* ==========================================
+       3. HIỆU ỨNG PHÁO GIẤY (CONFETTI)
+       ========================================== */
+    function triggerConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const pieces = [];
+      const colors = ['#8854C0', '#FDCB6E', '#00C9A7', '#FF7675', '#00D26A', '#6C5CE7'];
+
+      for (let i = 0; i < 90; i++) {
+        pieces.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          size: Math.random() * 9 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speed: Math.random() * 4 + 2,
+          rotation: Math.random() * 360
+        });
+      }
+
+      let animationFrame;
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.y += p.speed;
+          p.rotation += 2;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        });
+
+        if (pieces.some(p => p.y < canvas.height)) {
+          animationFrame = requestAnimationFrame(render);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          cancelAnimationFrame(animationFrame);
+        }
+      }
+      render();
+    }
+
+    /* ==========================================
+       4. LOGIC HIỂN THỊ CÂU HỎI (GIỮ NGUYÊN THỨ TỰ)
+       ========================================== */
+    let userAnswers = {};
+
+    function shuffle(array) {
+      let currentIndex = array.length, randomIndex;
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+      }
+      return array;
+    }
+
+    function renderQuiz() {
+      const quizContainer = document.getElementById('quiz-container');
+      quizContainer.innerHTML = '';
+
+      const sections = {};
+      quizData.forEach(item => {
+        if (!sections[item.section]) {
+          sections[item.section] = [];
+        }
+        sections[item.section].push(item);
+      });
+
+      for (const secTitle in sections) {
+        const secHeader = document.createElement('div');
+        secHeader.className = 'section-heading';
+        secHeader.innerHTML = `📌 ${secTitle}`;
+        quizContainer.appendChild(secHeader);
+
+        sections[secTitle].forEach(q => {
+          const card = document.createElement('div');
+          card.className = 'question-card';
+          card.id = `q-card-${q.id}`;
+
+          const shuffledOptions = shuffle([...q.options]);
+
+          let optionsHTML = '<div class="options-grid">';
+          shuffledOptions.forEach(opt => {
+            optionsHTML += `
+              <button class="option-btn" 
+                      id="btn-${q.id}-${opt.letter}" 
+                      onclick="selectAnswer('${q.id}', '${opt.letter}', '${q.correct}')">
+                <strong>${opt.letter}.</strong> ${opt.text}
+              </button>
+            `;
+          });
+          optionsHTML += '</div>';
+
+          let expStepsHTML = '';
+          if (q.explanation.step2 && Array.isArray(q.explanation.step2)) {
+            expStepsHTML = '<ul>' + q.explanation.step2.map(item => `<li>${item}</li>`).join('') + '</ul>';
+          }
+
+          const explanationHTML = `
+            <div class="explanation-box" id="exp-${q.id}">
+              <div class="exp-title">💡 PHẦN GIẢI THÍCH CHI TIẾT TỪ MS LÊ HẰNG:</div>
+              <div class="step"><strong>1. Phân tích & Dịch nghĩa câu hỏi:</strong> ${q.explanation.step1}</div>
+              ${expStepsHTML}
+              <div class="step"><strong class="highlight-green">2. Tại sao chọn đáp án đúng?</strong> ${q.explanation.step3}</div>
+              <div class="step"><strong>3. Phân tích lỗi sai các đáp án còn lại:</strong> ${q.explanation.step4}</div>
+            </div>
+          `;
+
+          card.innerHTML = `
+            <div class="question-title">${q.question}</div>
+            ${optionsHTML}
+            ${explanationHTML}
+          `;
+
+          quizContainer.appendChild(card);
+        });
+      }
+    }
+
+    function selectAnswer(qId, selectedLetter, correctLetter) {
+      if (userAnswers[qId]) return;
+
+      userAnswers[qId] = selectedLetter;
+
+      const isCorrect = (selectedLetter === correctLetter);
+      const selectedBtn = document.getElementById(`btn-${qId}-${selectedLetter}`);
+      const correctBtn = document.getElementById(`btn-${qId}-${correctLetter}`);
+      const expBox = document.getElementById(`exp-${qId}`);
+
+      const allBtns = document.querySelectorAll(`#q-card-${qId} .option-btn`);
+      allBtns.forEach(btn => btn.classList.add('disabled'));
+
+      if (isCorrect) {
+        selectedBtn.classList.add('correct');
+        playSound('correct');
+        triggerConfetti();
+      } else {
+        selectedBtn.classList.add('wrong');
+        correctBtn.classList.add('correct');
+        playSound('wrong');
+      }
+
+      if (expBox) {
+        expBox.style.display = 'block';
+      }
+
+      updateProgressBar();
+    }
+
+    function updateProgressBar() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const totalCount = quizData.length;
+      const percentage = (answeredCount / totalCount) * 100;
+      document.getElementById('progress-bar').style.width = percentage + '%';
+    }
+
+    /* ==========================================
+       5. LOGIC CHẤM ĐIỂM & TỔNG KẾT
+       ========================================== */
+    function submitQuiz() {
+      let score = 0;
+      const total = quizData.length;
+
+      quizData.forEach(q => {
+        if (userAnswers[q.id] === q.correct) {
+          score++;
+        }
+      });
+
+      const percentage = (score / total) * 100;
+      let feedback = "";
+
+      if (percentage < 50) {
+        feedback = "Điểm lần này chưa cao lắm, con cố gắng đọc kỹ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!";
+      } else if (percentage <= 80) {
+        feedback = "Con đã có tiến bộ khá ổn rồi, con cố gắng đọc kỹ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!";
+      } else {
+        feedback = "Làm tốt lắm, con cố gắng ring điểm 10 ở lần sau nha!";
+        triggerConfetti();
+      }
+
+      document.getElementById('modal-score-text').innerText = `${score} / ${total}`;
+      document.getElementById('modal-feedback-text').innerText = feedback;
+      document.getElementById('result-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('result-modal').style.display = 'none';
+    }
+
+    window.onload = function() {
+      renderQuiz();
+    };
+  </script>
+</body>
+</html>
